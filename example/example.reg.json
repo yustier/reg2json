@@ -1,0 +1,102 @@
+{
+	"HKEY_CURRENT_USER": {
+		"values": {},
+		"keys": {
+			"__EXAMPLE_KEY": {
+				"values": {},
+				"keys": {
+					"ESCAPED_KEY": {
+						"values": {
+							"A=B": {
+								"type": "REG_SZ",
+								"data": "値名や値に等号(=)が含まれる場合"
+							},
+							"A=\"B\"": {
+								"type": "REG_SZ",
+								"data": "値名や値にダブルクォート\"が含まれる場合"
+							},
+							"A=\\\"B\\\"": {
+								"type": "REG_SZ",
+								"data": "値名や値にバックスラッシュ\\とダブルクォート\"が含まれる場合"
+							}
+						},
+						"keys": {}
+					},
+					"DEFAULT_KEY": {
+						"values": {
+							"": {
+								"type": "REG_SZ",
+								"data": "modified"
+							},
+							"Description": {
+								"type": "REG_SZ",
+								"data": "このキーでは既定の値が変更されている。"
+							},
+							"@": {
+								"type": "REG_SZ",
+								"data": "既定ではなく、@という名前の値。"
+							}
+						},
+						"keys": {
+							"EMPTY_KEY": {
+								"values": {
+									"": {
+										"type": "REG_SZ",
+										"data": ""
+									},
+									"Description": {
+										"type": "REG_SZ",
+										"data": "このキーの既定値は空文字列を指定してある。"
+									}
+								},
+								"keys": {}
+							}
+						}
+					},
+					"VALUE_TYPES": {
+						"values": {
+							"REG_SZ__NullTerminatedString": {
+								"type": "REG_SZ",
+								"data": "A null-terminated string. It's either a Unicode or an ANSI string, depending on whether you use the Unicode or ANSI functions."
+							},
+							"REG_BINARY__BinaryDataInAnyForm": {
+								"type": "REG_BINARY",
+								"data": [
+									170,
+									85,
+									170,
+									85
+								]
+							},
+							"REG_DWORD__32bitInteger": {
+								"type": "REG_DWORD",
+								"data": 43605
+							},
+							"REG_QWORD__64bitInteger": {
+								"type": "REG_QWORD",
+								"data": 187284906681765
+							},
+							"REG_MULTI_SZ__SequenceOfNullTerminatedString": {
+								"type": "REG_MULTI_SZ",
+								"data": [
+									"A sequence of null-terminated strings, terminated by an empty string (\\0).",
+									"The following is an example: String1\\0String2\\0String3\\0LastString\\0\\0.",
+									"The first \\0 terminates the first string.",
+									"The second-from-last \\0 terminates the last string.",
+									"The final \\0 terminates the sequence.",
+									"Note that the final terminator must be factored into the length of the string.",
+									""
+								]
+							},
+							"REG_EXPAND_SZ__ReferencedNullTerminatedString": {
+								"type": "REG_EXPAND_SZ",
+								"data": "A null-terminated string that contains unexpanded references to environment variables, for example, %PATH%. It's either a Unicode or an ANSI string, depending on whether you use the Unicode or ANSI functions. To expand the environment variable references, use the ExpandEnvironmentStrings function."
+							}
+						},
+						"keys": {}
+					}
+				}
+			}
+		}
+	}
+}
