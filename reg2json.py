@@ -44,8 +44,8 @@ def append_bytes_to_array(arr: list, s: str):
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Convert a Windows registry file to JSON')
 	parser.add_argument('input', metavar='InFilePath', help='Input registry file')
-	parser.add_argument('--output', '-o', metavar='OutFilePath', help='Output JSON file', default=None)
-	parser.add_argument('--verbose', '-v', action='store_true', help='Enable verbose mode')
+	parser.add_argument('-o', '--output', metavar='OutFilePath', help='Output JSON file', default=None)
+	parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose mode')
 	args = parser.parse_args()
 
 	if args.output is None:
@@ -70,7 +70,10 @@ if __name__ == '__main__':
 		if not line:
 			continue
 
-		if line.startswith('['):
+		if line.startswith(';'):  # comment
+			continue
+
+		if line.startswith('['):  # key
 
 			keyPath = line[1:-1]
 			current = find_key(regjson, keyPath)
@@ -84,18 +87,26 @@ if __name__ == '__main__':
 				lineNum += 1
 				line = lineOrig
 
-				if not line: # end of key
+				if not line:
+					continue
+
+				if line.startswith(';'):  # comment
+					continue
+
+				if line.startswith('['):  # next key
+					lines.insert(0, lineOrig)  # put it back for the next iteration
+					lineNum -= 1
 					break
 
-				if '=' in line:
+				if '=' in line:  # value
 
 					# (Default) REG_SZ
-					if line.startswith('@'):
+					if line.startswith('@'):  # default value
 						valueName = ''
 						valueType = 'REG_SZ'
 						valueData = line[2:].strip('"')
 
-					elif line.startswith('"'):
+					elif line.startswith('"'):  # named value
 
 						valueName, line = pop_first_quoted_string(line)
 
@@ -177,7 +188,7 @@ if __name__ == '__main__':
 			print(f'       {lineOrig}', file=sys.stderr)
 			print( '       Ignoring this line', file=sys.stderr)
 
-	with open(args.output, 'w') as f:
+	with open(args.output, 'w', encoding='utf-8') as f:
 		json.dump(regjson, f, ensure_ascii=False, indent='\t')
 
 	print(f'[INFO] Successfully converted registry file to JSON: {args.output}')

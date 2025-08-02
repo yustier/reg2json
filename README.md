@@ -3,21 +3,18 @@ Convert Windows Registry into JSON
 
 ## Usage
 ```bash
-python reg2json.py -i input.reg output.json
+python reg2json.py -o output.json input.reg
 ```
 
 ```bash
-python json2reg.py -i input.json output.reg
+python json2reg.py -o output.reg input.json
 ```
 Both scripts support `-h` or `--help` for help.
 
 ## Example
-```
-[ ] keyName
-    - valueName: valueType = valueData
-    [ ] subKeyName
-```
+See the `example` directory.
 
+## Structure
 ```json
 {
   "keyName": {
@@ -29,9 +26,14 @@ Both scripts support `-h` or `--help` for help.
     },
     "keys": {
       "subKeyName": {
-        "values": {},
-        "keys": {}
-      }
+        "values": { /* ... */ },
+        "keys": { /* ... */ }
+      },
+      "subKeyName": {
+        "values": { /* ... */ },
+        "keys": { /* ... */ }
+      },
+      // ...
     }
   }
 }
