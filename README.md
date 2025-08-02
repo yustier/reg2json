@@ -1,7 +1,20 @@
-# reg2json
+reg2json
+========
+
 Convert Windows Registry into JSON
 
-## Usage
+> [!WARNING]
+> Currently this program does not have:
+>
+> - Support for IF conditions
+> - Support for deleting a key
+> - Support for deleting a value
+>
+> <https://learn.microsoft.com/en-us/previous-versions/windows/embedded/gg469889(v=winembedded.80)>
+
+Usage
+-----
+
 ```bash
 python reg2json.py -o output.json input.reg
 ```
@@ -11,10 +24,14 @@ python json2reg.py -o output.reg input.json
 ```
 Both scripts support `-h` or `--help` for help.
 
-## Example
+Example
+-------
+
 See the `example` directory.
 
-## Structure
+Structure
+---------
+
 ```json
 {
   "keyName": {
